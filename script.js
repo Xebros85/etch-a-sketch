@@ -1,40 +1,30 @@
-// Create game box
+
+// Global Variables
+const containerSize = 750;
+const gridSize = 16;
+
+const resetButton = document.querySelector("button"); 
 const containerDiv = document.querySelector("#container");
 
-const titleBox = document.createElement("h1");
-titleBox.id = "title-box";
-titleBox.innerText = "Etch-A-Sketch";
-containerDiv.appendChild(titleBox);
+// Create Grid
+const createGrid = (gridSize) => {
+    for (let i = 0; i < gridSize; i++){
+        const row = document.createElement("div");
+        row.classList.add("grid-row");
 
-const outsideBox = document.createElement("div");
-outsideBox.id = "outside-box";
-containerDiv.appendChild(outsideBox);
-
-const insideBox = document.createElement("div");
-insideBox.id = "inside-box";
-outsideBox.appendChild(insideBox);
-
-
-// Create "grid"
-const gridHeight = 16;
-const gridWidth = 16;
-let gridSquares;
-
-function makeRows(row, col) {
-    for (let i = 0; i < (row * col); i++) {
-        let gridSquares = document.createElement("div");
-        gridSquares.innerText = (i + 1);
-        insideBox.appendChild(gridSquares).id = "grid-squares";
+        for (let j = 0; j < gridSize; j++) {
+            const gridWidthAndHeight = containerSize / gridSize;
+            const gridBox = document.createElement("div");
+            gridBox.classList.add("grid-box");
+            gridBox.style.width = `${gridWidthAndHeight}px`;
+            gridBox.style.height = `${gridWidthAndHeight}px`;
+            gridBox.addEventListener("mouseenter", () => {
+                gridBox.style.backgroundColor = "grey";
+            })
+            row.appendChild(gridBox);
+        }
+        containerDiv.appendChild(row);
     }
 }
 
-makeRows(gridHeight, gridWidth);
-
-
-// Broken - Need to fix
-insideBox.addEventListener("mouseenter", (event) => {
-    const target = event.target
-    const gridColor = document.getElementById("grid-squares")
-
-    gridColor.style.backgroundColor = "blue";
-})
+createGrid(gridSize);
