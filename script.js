@@ -1,13 +1,16 @@
 
 // Global Variables
-const containerSize = 750;
-const gridSize = 16;
+const containerSize = 700;
+let gridSize = 16;
 
 const resetButton = document.querySelector("button"); 
-const containerDiv = document.querySelector("#container");
+
 
 // Create Grid
 const createGrid = (gridSize) => {
+    
+    const containerDiv = document.querySelector("#container");
+    
     for (let i = 0; i < gridSize; i++){
         const row = document.createElement("div");
         row.classList.add("grid-row");
@@ -28,3 +31,28 @@ const createGrid = (gridSize) => {
 }
 
 createGrid(gridSize);
+
+function resetBoard() {
+    let board = document.querySelector("#container");
+    let squares = board.querySelectorAll("div");
+    squares.forEach((div) => div.style.backgroundColor = "white");
+}
+
+function removeBoard(){
+    let board = document.querySelector("#container");
+    let squares = board.querySelectorAll("div");
+    squares.remove();
+}
+
+function changeSize() {
+    
+    let newSize = Number(prompt("What size would you like the board to be?"));    
+
+    if (newSize >= 2 && newSize <= 100) {
+               
+        createGrid(newSize);
+
+    } else {
+        newSize = Number(prompt("Please enter a number between 2 and 100"));
+    }
+}
