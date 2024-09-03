@@ -30,18 +30,16 @@ const createGrid = (gridSize) => {
     }
 }
 
-createGrid(gridSize);
-
 function resetBoard() {
     let board = document.querySelector("#container");
     let squares = board.querySelectorAll("div");
     squares.forEach((div) => div.style.backgroundColor = "white");
 }
 
-function removeBoard(){
+function removeBoard() {
     let board = document.querySelector("#container");
     let squares = board.querySelectorAll("div");
-    squares.remove();
+    squares.forEach((div) => div.remove());     
 }
 
 function changeSize() {
@@ -49,10 +47,11 @@ function changeSize() {
     let newSize = Number(prompt("What size would you like the board to be?"));    
 
     if (newSize >= 2 && newSize <= 100) {
-               
+        removeBoard();      
         createGrid(newSize);
-
     } else {
         newSize = Number(prompt("Please enter a number between 2 and 100"));
     }
 }
+
+createGrid(gridSize);
